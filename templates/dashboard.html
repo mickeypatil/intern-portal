@@ -29,6 +29,11 @@
                 <li class="nav-item mb-2">
                     <a class="nav-link text-white" href="{{ url_for('security') }}">Security</a>
                 </li>
+                {% if session['role'] == 'admin' %}
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-white" href="{{ url_for('hr_portal') }}">HR Portal</a>
+                </li>
+                {% endif %}
                 <li class="nav-item mt-4">
                     <a class="btn btn-outline-light w-100" href="{{ url_for('logout') }}">Logout</a>
                 </li>

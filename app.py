@@ -122,6 +122,16 @@ def dashboard():
 
     return render_template("dashboard.html", messages=messages)
 
+@app.route("/hr")
+def hr_portal():
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    if session.get("role") != "admin":
+        return "Access Denied - Admin Only"
+
+    return render_template("hr.html")
+
 @app.route("/announcements")
 def announcements():
     if "user" not in session:
