@@ -55,9 +55,9 @@ def register():
         conn = get_db_connection()
         try:
             conn.execute(
-                "INSERT INTO users (email, password) VALUES (?, ?)",
-                (email, password)
-            )
+                "INSERT INTO users (email, password, role) VALUES (?, ?, ?)",
+                (email, password, 'intern')
+                )
             conn.commit()
         except sqlite3.IntegrityError:
             conn.close()
@@ -84,6 +84,7 @@ def login():
 
         if user and check_password_hash(user["password"], password):
             session["user"] = email
+            session["role"] = user["role"]
             return redirect(url_for("dashboard"))
 
         return "Invalid credentials"

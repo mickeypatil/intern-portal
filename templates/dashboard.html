@@ -18,7 +18,7 @@
 
             <ul class="nav flex-column">
                 <li class="nav-item mb-2">
-                    <a class="nav-link text-white" href="{{ url_for('dashboard') }}">General</a>
+                    <a class="nav-link text-white active bg-secondary rounded" href="{{ url_for('dashboard') }}">General</a>
                 </li>
                 <li class="nav-item mb-2">
                     <a class="nav-link text-white" href="{{ url_for('announcements') }}">Announcements</a>
@@ -51,10 +51,12 @@
             <div class="card">
                 <div class="card-body">
                     {% for msg in messages %}
-                        <p class="mb-2">
-                            <strong>{{ msg.user }}</strong>: {{ msg.text }}
-                        </p>
+                        <div class="mb-2 p-2 border rounded">
+                            <small class="text-muted">{{ msg.user }}</small>
+                            <div>{{ msg.text }}</div>
+                        </div>
                     {% endfor %}
+
                 </div>
             </div>
 
