@@ -39,6 +39,13 @@ def init_db():
     conn.commit()
     conn.close()
 
+    conn = get_db_connection()
+    columns = conn.execute("PRAGMA table_info(users)").fetchall()
+    column_names = [column[1] for column in columns]
+    if "role" not in column_names:
+        conn.execute("ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'intern'")
+        conn.commit()
+        conn.close()
 
 # Initialize database ONCE at startup
 init_db()
