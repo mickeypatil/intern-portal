@@ -122,6 +122,26 @@ def dashboard():
 
     return render_template("dashboard.html", messages=messages)
 
+@app.route("/announcements")
+def announcements():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return render_template("announcements.html")
+
+
+@app.route("/resources")
+def resources():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return render_template("resources.html")
+
+
+@app.route("/security")
+def security():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return render_template("security.html")
+
 
 @app.route("/logout")
 def logout():
