@@ -27,6 +27,21 @@ def init_db():
     )
     """)
 
+    from werkzeug.security import generate_password_hash
+    # Create default admin if not exists
+    admin_email = "admin@faith.com"
+    admin_password = generate_password_hash("admin123")
+    existing_admin = conn.execute(
+        "SELECT * FROM users WHERE email = ?",
+        (admin_email,)
+        ).fetchone()
+    if not existing_admin:
+        conn.execute(
+            "INSERT INTO users (email, password, role) VALUES (?, ?, ?)",
+            (admin_email, admin_password, "admin")
+            )
+        conn.commit()
+
     # Messages table
     conn.execute("""
     CREATE TABLE IF NOT EXISTS messages (
